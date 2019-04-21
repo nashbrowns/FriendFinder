@@ -22,8 +22,64 @@ module.exports = function (app) {
     });
 
     app.post("/api/friends", function(req, res){
-        friendData.push(req.body);
-        res.json(true);
+
+        let newFriend = req.body;
+        let newScore = req.body.scores;
+        let newTotal = getTotal(newScore);
+        let totalDiff = [];
+        let matchArr = [];
+
+
+        for(let i = 0; i<friendData.length; i++){
+            
+            totalDiff.push(Math.abs(newTotal - getTotal(friendData[i].scores)));
+            
+        }
+
+        let friendIndex = getIndex(totalDiff);
+
+        console.log('totalDiff = '+totalDiff);
+        console.log('friendIndex = '+friendIndex);
+
+        for(let i = 0; i<friendIndex.length; i++){
+            matchArr.push(friendData[friendIndex[i]]);
+        };
+
+        console.log(matchArr);
+
+        friendData.push(newFriend);
+
+        res.json(matchArr);
+
     });
+
+    function getTotal(friendScores){
+
+        let Total = 0;
+
+        for(let i = 0; i<friendScores.length; i++){
+            let toInt = parseInt(friendScores[i]);
+            Total = Total + toInt;
+        }
+        console.log('Total = '+Total);
+
+        return Total;
+    }
+
+    function getIndex(totalDiff){
+
+        indexArr = [];
+
+        let smallVal = Math.min(...totalDiff);  
+
+        for(let i = 0; i<totalDiff.length; i++){
+            if(totalDiff[i] === smallVal){
+                indexArr.push(i);
+            }
+        }
+
+        return indexArr;
+    }
+
 
 };

@@ -31,8 +31,26 @@ var friendArray = [
             1
           ]
       },
+      {
+        "name":"Frank's twin",
+        "photo":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ30Wv9j7PXYGutGE21RFCREs4I9_Wn12p7K9npOk2JYV9XS9Ng",
+        "scores":[
+            2,
+            5,
+            4,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1
+          ]
+      }
         
   ];
+
+  var matches = [];
   
   // Note how we export the array. This makes it accessible to other files using require.
   module.exports = friendArray;

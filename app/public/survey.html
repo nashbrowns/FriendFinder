@@ -177,7 +177,9 @@
 
 
         //add friend to friendData
-        $.post("/api/friends", newFriend);
+        $.post("/api/friends", newFriend, function(data){
+            console.log(data);
+        });
 
     });
 
