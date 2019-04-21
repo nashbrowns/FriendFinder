@@ -14,6 +14,32 @@
 
 <body>
 
+        <div class="container">
+
+                <!-- Modal -->
+                <div class="modal" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Matches</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                
+                            </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
     <div class="jumbotron jumbotron-fluid text-center">
         <div class="container">
             <h1 class="display-4">Friend Survey</h1>
@@ -134,6 +160,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary submit btn-lg">Submit</button>
                 </form>
+
             </div>
             <div class="col-3"></div>
         </div>
@@ -151,16 +178,14 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.0.js"
         integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 </body>
 
 </html>
 
 <script type="text/javascript">
-    // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
-    // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
-    // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
-    // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
 
     $(".submit").on("click", function (event) {
         event.preventDefault();
@@ -177,10 +202,13 @@
 
 
         //add friend to friendData
-        $.post("/api/friends", newFriend, function(data){
+        $.post("/api/friends", newFriend, function (data) {
             console.log(data);
+            $('#myModal').modal('toggle');
         });
 
+
     });
+
 
 </script>
