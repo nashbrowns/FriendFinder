@@ -14,31 +14,31 @@
 
 <body>
 
-        <div class="container">
+    <div class="container">
 
-                <!-- Modal -->
-                <div class="modal" id="myModal" role="dialog">
-                    <div class="modal-dialog">
+        <!-- Modal -->
+        <div class="modal" id="myModal" role="dialog">
+            <div class="modal-dialog">
 
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">It's a Match!</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                
-                            </div>
-                            <div id = "newMatch">
-                                <!-- New Match data is appended here -->
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">It's a Match!</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
 
+                    </div>
+                    <div id="newMatch">
+                        <!-- New Match data is appended here -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
 
             </div>
+        </div>
+
+    </div>
 
     <div class="jumbotron jumbotron-fluid text-center">
         <div class="container">
@@ -82,7 +82,7 @@
                             <option>5</option>
                         </select>
                         <br>
-                        <label for="exampleFormControlSelect1">You'd rather lay on the couch than go outside</label>
+                        <label for="exampleFormControlSelect1">You'd rather go outside than lay on the couch</label>
                         <select class="form-control" id="q3">
                             <option>1</option>
                             <option>2</option>
@@ -100,7 +100,7 @@
                             <option>5</option>
                         </select>
                         <br>
-                        <label for="exampleFormControlSelect1">You absolutely love going to parks</label>
+                        <label for="exampleFormControlSelect1">Peanut butter is your favorite flavor</label>
                         <select class="form-control" id="q5">
                             <option>1</option>
                             <option>2</option>
@@ -109,7 +109,8 @@
                             <option>5</option>
                         </select>
                         <br>
-                        <label for="exampleFormControlSelect1">You absolutely love going to parks.</label>
+                        <label for="exampleFormControlSelect1">Your dad/mom coming home is the best part of the
+                            day</label>
                         <select class="form-control" id="q6">
                             <option>1</option>
                             <option>2</option>
@@ -118,10 +119,8 @@
                             <option>5</option>
                         </select>
                         <br>
-                        <label for="exampleFormControlSelect1">When you play fetch, you'd rather hold onto the ball
-                            than
-                            give it
-                            back.</label>
+                        <label for="exampleFormControlSelect1">When you meet new people you want to sniff their
+                            butt</label>
                         <select class="form-control" id="q7">
                             <option>1</option>
                             <option>2</option>
@@ -130,7 +129,8 @@
                             <option>5</option>
                         </select>
                         <br>
-                        <label for="exampleFormControlSelect1">You'd rather lay on the couch than go outside</label>
+                        <label for="exampleFormControlSelect1">When you get excited you like to jump around and
+                            yell</label>
                         <select class="form-control" id="q8">
                             <option>1</option>
                             <option>2</option>
@@ -139,7 +139,7 @@
                             <option>5</option>
                         </select>
                         <br>
-                        <label for="exampleFormControlSelect1">Belly rubs are the best thing ever</label>
+                        <label for="exampleFormControlSelect1">SQUIRELL!!</label>
                         <select class="form-control" id="q9">
                             <option>1</option>
                             <option>2</option>
@@ -148,7 +148,7 @@
                             <option>5</option>
                         </select>
                         <br>
-                        <label for="exampleFormControlSelect1">You absolutely love going to parks</label>
+                        <label for="exampleFormControlSelect1">You are a very good boy</label>
                         <select class="form-control" id="q10">
                             <option>1</option>
                             <option>2</option>
@@ -206,15 +206,20 @@
         $.post("/api/friends", newFriend, function (data) {
             console.log(data);
 
-            for(let i = 0; i<data.length; i++){
-                let body = $('<div>').addClass('modal-body');
-                let img = $('<img>').attr('src',data[i].photo);
+            for (let i = 0; i < data.length; i++) {
+                let body = $('<div>').addClass('modal-body match');
+                let img = $('<img>').attr('src', data[i].photo);
                 let par = $('<p>').text(data[i].name);
                 body.append(par).append(img);
                 $('#newMatch').append(body);
             }
             $('#myModal').modal('toggle');
         });
+
+        $('#myModal').on('hidden.bs.modal', function (e) {
+            $('.match').remove();
+            alert('content removed');
+        })
 
     });
 
