@@ -62,11 +62,60 @@ var friendArray = [
             5,
             5
           ]
-      }
+      },
+      {
+        "name":"Mittens",
+        "photo":"https://i.imgur.com/00jcTpf.jpg",
+        "scores":[
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+      },
+      {
+        "name":"Rex",
+        "photo":"http://41.media.tumblr.com/076e8266e7224f228c9260f6d4db7351/tumblr_nox2ttRqbn1usp1v3o1_1280.jpg",
+        "scores":[
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+      },
+      {
+        "name":"Matilda",
+        "photo":"http://www.easypetmd.com/sites/default/files/Miniature%20Poodle%20(6).jpg",
+        "scores":[
+            2,
+            1,
+            2,
+            3,
+            2,
+            3,
+            2,
+            1,
+            1,
+            3
+          ]
+      },
+
+      
         
   ];
 
-  var matches = [];
   
   // Note how we export the array. This makes it accessible to other files using require.
   module.exports = friendArray;

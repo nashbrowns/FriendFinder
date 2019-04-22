@@ -10,6 +10,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
 <body>
@@ -19,17 +22,17 @@
             <h1 class="display-4">Friend Finder</h1>
             <p class="lead">Welcome to Friend Finder!</p>
             <p class="lead">Press start to take the survey and find your ideal friend</p>
+            <a href="/survey">
+                <button type="button" class="btn btn-primary btn-lg"><i class="fas fa-clipboard"></i>Start</button>
+            </a>
         </div>
     </div>
 
-    <div class = "row">
-        <div class = "col"></div>
-        <div class = "col text-center">
-            <a href="/survey">
-                <button type="button" class="btn btn-primary btn-lg">Start</button>
-            </a>
-        </div>
-        <div class = "col"></div>
+    <div class="row">
+        <div class='col text-center' id ="friendDisplay1"></div>
+        <div class="col text-center" id="friendDisplay2"></div>
+        <div class="col text-center" id="friendDisplay3"></div>
+        <div class="col text-center" id="friendDisplay4"></div>
     </div>
 
     <!-- Bootstrap JS Links -->
@@ -42,6 +45,31 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
 </body>
 
 </html>
+
+<script type="text/javascript">
+
+    var currentURL = window.location.origin;
+
+    $.ajax({ url: currentURL + "/api/friends", method: "GET" })
+        .done(function (friendData) {
+
+            
+            console.log(friendData);
+
+            for(let i = 0; i<friendData.length;i++){
+                let card = $('<div>').addClass('card').attr('style','width:18rem');
+                let cardImg = $('<img>').addClass('card-img-top').attr('src',friendData[i].photo);
+
+                card.append(cardImg);
+
+                $('#friendDisplay').append(card);
+            }
+
+        });
+
+
+</script>
