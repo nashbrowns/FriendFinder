@@ -28,11 +28,19 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class='col text-center' id ="friendDisplay1"></div>
-        <div class="col text-center" id="friendDisplay2"></div>
-        <div class="col text-center" id="friendDisplay3"></div>
-        <div class="col text-center" id="friendDisplay4"></div>
+    <div class="container">
+        <div class="row">
+            <div class = 'col'></div>
+            <div class = 'col'>
+                <h1>Potential Friends</h1>
+            </div>
+            <div class = 'col'></div>
+        </div>
+        <div class="row">
+            <div class='col text-center' id="friendDisplay1"></div>
+            <div class="col text-center" id="friendDisplay2"></div>
+            <div class="col text-center" id="friendDisplay3"></div>
+        </div>
     </div>
 
     <!-- Bootstrap JS Links -->
@@ -57,16 +65,29 @@
     $.ajax({ url: currentURL + "/api/friends", method: "GET" })
         .done(function (friendData) {
 
-            
+
             console.log(friendData);
 
-            for(let i = 0; i<friendData.length;i++){
-                let card = $('<div>').addClass('card').attr('style','width:18rem');
-                let cardImg = $('<img>').addClass('card-img-top').attr('src',friendData[i].photo);
+            let column = 1;
 
-                card.append(cardImg);
+            for (let i = 0; i < friendData.length; i++) {
 
-                $('#friendDisplay').append(card);
+                if (column >= 4) {
+                    column = 1;
+                }
+
+                let card = $('<div>').addClass('card').attr('style', 'width:18rem');
+                let cardImg = $('<img>').addClass('card-img-top').attr('src', friendData[i].photo).attr('style', 'width:286px; height:180px;');
+                let body = $('<div>').addClass('card-body');
+                let title = $('<h5>').addClass('card-title').text(friendData[i].name);
+                
+                body.append(title);
+
+                card.append(cardImg).append(body);
+
+                $('#friendDisplay' + column).append(card);
+
+                column++;
             }
 
         });

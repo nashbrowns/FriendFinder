@@ -26,13 +26,20 @@
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header text-center">
                         <h4 class="modal-title">It's a Match!</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-
                     </div>
-                    <div id="newMatch">
-                        <!-- New Match data is appended here -->
+                    <div class='row'>
+                        <div class = 'col'>
+                                
+                        </div>
+                        <div class = 'col' id="newMatch">
+                            <!-- New Match data is appended here -->
+                        </div>
+                        <div class = 'col'>
+                                
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <a href="/" style="align-content: left">
@@ -221,11 +228,20 @@
                 console.log(data);
 
                 for (let i = 0; i < data.length; i++) {
-                    let body = $('<div>').addClass('modal-body match');
-                    let img = $('<img>').attr('src', data[i].photo).attr('style', 'height: 300px; width: 250px;');
-                    let par = $('<p>').text(data[i].name);
-                    body.append(par).append(img);
-                    $('#newMatch').append(body);
+                    let modBody = $('<div>').addClass('modal-body match text-center');
+
+                    let card = $('<div>').addClass('card').attr('style', 'width:18rem');
+                    let cardImg = $('<img>').addClass('card-img-top').attr('src', data[i].photo).attr('style', 'width:286px; height:180px;');
+                    let cardBody = $('<div>').addClass('card-body');
+                    let title = $('<h5>').addClass('card-title').text(data[i].name);
+
+                    cardBody.append(title);
+
+                    card.append(cardImg).append(cardBody);
+
+                    modBody.append(card);
+
+                    $('#newMatch').append(modBody);
                 }
                 $('#myModal').modal('toggle');
             });
